@@ -1,0 +1,26 @@
+spring:
+  sql:
+    init:
+      mode: always
+  jpa:
+    open-in-view: false
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+  flyway:
+    locations: classpath:db/migrations
+  jackson:
+    time-zone: UTC
+    date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
+    default-leniency: true
+    deserialization:
+      fail-on-unknown-properties: false
+    serialization:
+      write-dates-as-timestamps: false
+
+logging:
+  level:
+    org:
+      hibernate:
+        type: trace

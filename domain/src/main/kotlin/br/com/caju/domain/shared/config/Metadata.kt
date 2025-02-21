@@ -1,6 +1,5 @@
 package br.com.caju.domain.shared.config
 
-
 import br.com.caju.domain.shared.config.Metadata.CORRELATION_ID
 import br.com.caju.domain.shared.config.Metadata.REQUESTER_ID
 import java.util.UUID.randomUUID

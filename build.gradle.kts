@@ -6,12 +6,15 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.STARTED
 
 plugins {
     alias(libs.plugins.kotlin)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.kotlin.all.open)
+    alias(libs.plugins.kotlin.no.arg)
     alias(libs.plugins.kotlin.jpa)
     alias(libs.plugins.kotlin.spring)
     alias(libs.plugins.spring.boot) apply false
+    alias(libs.plugins.native.build.tools) apply false
     alias(libs.plugins.jacoco)
     alias(libs.plugins.spotless)
-    alias(libs.plugins.sonarqube)
     `java-test-fixtures`
     jacoco
     `version-catalog`
@@ -48,8 +51,8 @@ allprojects {
         plugin("jacoco")
         plugin("java-test-fixtures")
         plugin("com.diffplug.spotless")
-        plugin("org.sonarqube")
         plugin("version-catalog")
+        plugin("com.google.devtools.ksp")
     }
 
     spotless {
@@ -60,28 +63,23 @@ allprojects {
 
     configurations { compileOnly { extendsFrom(configurations.annotationProcessor.get()) } }
 
-    repositories {
-        mavenLocal()
-        mavenCentral()
-        gradlePluginPortal()
-        maven { url = uri("https://jitpack.io") }
-        maven { url = uri("https://packages.confluent.io/maven/") }
-    }
-
     dependencies {
         implementation(platform(libs.spring.boot.dependencies))
         implementation(platform(libs.spring.boot.cloud.dependencies))
 
-        testImplementation(platform("org.springframework.boot:spring-boot-dependencies:3.3.4"))
+        annotationProcessor(libs.spring.boot.configuration.processor)
+        testAnnotationProcessor(libs.spring.boot.configuration.processor)
+
+        testImplementation(platform(libs.spring.boot.dependencies))
         testImplementation(platform(libs.spring.boot.cloud.dependencies))
 
         testFixturesImplementation(platform(libs.spring.boot.dependencies))
         testFixturesImplementation(platform(libs.spring.boot.cloud.dependencies))
 
-        implementation("org.springframework:spring-tx")
-        implementation("org.springframework.boot:spring-boot-autoconfigure")
-        implementation("org.springframework.boot:spring-boot-starter-logging")
-        implementation("org.springframework.boot:spring-boot-starter")
+        implementation(libs.spring.tx)
+        implementation(libs.spring.boot.autoconfigure)
+        implementation(libs.spring.boot.starter.logging)
+        implementation(libs.spring.boot.starter)
 
         implementation(kotlin("reflect"))
         implementation(kotlin("stdlib-jdk8"))
@@ -89,26 +87,23 @@ allprojects {
         implementation(libs.kotlinx.coroutines.reactor)
         implementation(libs.kotlinx.coroutines.reactive)
 
-        implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-        implementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8")
-        implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
+        implementation(libs.jackson.kotlin)
+        implementation(libs.jackson.jdk8)
+        implementation(libs.jackson.jsr310)
 
         implementation(libs.logback.encoder)
         implementation(libs.dd.trace.api)
 
-        testImplementation("org.springframework.boot:spring-boot-starter-test") {
-            exclude(module = "mockito-core")
-        }
+        testImplementation(libs.spring.boot.starter.test) { exclude(module = "mockito-core") }
         testImplementation(libs.springmockk)
         testImplementation(libs.kotest.runner.junit5.jvm)
         testImplementation(libs.kotest.assertions.core.jvm)
         testImplementation(libs.kotest.property.jvm)
         testImplementation(libs.kotest.extensions.spring)
 
-        testFixturesImplementation(libs.instancio.junit)
         testFixturesImplementation(libs.assertj.core)
         testFixturesImplementation(kotlin("reflect"))
-        testFixturesImplementation("org.springframework.boot:spring-boot-starter-test") {
+        testFixturesImplementation(libs.spring.boot.starter.test) {
             exclude(module = "mockito-core")
         }
         testFixturesImplementation(libs.springmockk)
@@ -121,34 +116,6 @@ allprojects {
         project.name
             .takeIf { it != rootProject.projects.domain.name }
             ?.let { testFixturesApi(testFixtures(rootProject.projects.domain)) }
-
-        //		implementation("org.springframework.boot:spring-boot-starter-actuator")
-        //		implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-        //		implementation("org.springframework.boot:spring-boot-starter-graphql")
-        //		implementation("org.springframework.boot:spring-boot-starter-webflux")
-        //		implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-        //		implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
-        //		implementation("org.flywaydb:flyway-core")
-        //		implementation("org.flywaydb:flyway-mysql")
-        //		implementation("org.jetbrains.kotlin:kotlin-reflect")
-        //		implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
-        //
-        //	implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j")
-        //		implementation("org.springframework.kafka:spring-kafka")
-        //		developmentOnly("org.springframework.boot:spring-boot-docker-compose")
-        //		runtimeOnly("com.mysql:mysql-connector-j")
-        //		runtimeOnly("io.micrometer:micrometer-registry-datadog")
-        //		annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
-        //		testImplementation("org.springframework.boot:spring-boot-starter-test")
-        //		testImplementation("org.springframework.boot:spring-boot-testcontainers")
-        //		testImplementation("io.projectreactor:reactor-test")
-        //		testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
-        //		testImplementation("org.springframework.graphql:spring-graphql-test")
-        //		testImplementation("org.springframework.kafka:spring-kafka-test")
-        //		testImplementation("org.testcontainers:junit-jupiter")
-        //		testImplementation("org.testcontainers:kafka")
-        //		testImplementation("org.testcontainers:mysql")
-        //		testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     }
 
     reporting { baseDirectory.set(reportingDirectory) }
@@ -176,13 +143,7 @@ allprojects {
 
             testLogging {
                 showStandardStreams = true
-                events =
-                    setOf(
-                        PASSED,
-                        FAILED,
-                        STARTED,
-                        SKIPPED,
-                    )
+                events = setOf(PASSED, FAILED, STARTED, SKIPPED)
                 exceptionFormat = FULL
             }
 
@@ -217,18 +178,6 @@ allprojects {
             )
         }
     }
-
-    sonar {
-        properties {
-            property("sonar.projectKey", "<project-key>")
-            property("sonar.projectName", "<project-name>")
-            property(
-                "sonar.coverage.jacoco.xmlReportPaths",
-                "/runner/_work/<project-repo-name>/<project-name>/build/report/test/xml/result.xml",
-            )
-            property("sonar.exclusions", patternsToExcludeFromTesting.joinToString(separator = ","))
-        }
-    }
 }
 
 tasks {
@@ -242,17 +191,17 @@ tasks {
     jacocoAggregatedReport {
         reports {
             csv.apply {
-                outputLocation.set(unitTestReportingDirectory.dir("csv").file("result.csv").asFile)
+                outputLocation.set(coverageReportingDirectory.dir("csv").file("result.csv").asFile)
                 required.set(false)
             }
 
             html.apply {
-                outputLocation.set(unitTestReportingDirectory.dir("html").asFile)
+                outputLocation.set(coverageReportingDirectory.dir("html").asFile)
                 required.set(true)
             }
 
             xml.apply {
-                outputLocation.set(unitTestReportingDirectory.dir("xml").file("result.xml").asFile)
+                outputLocation.set(coverageReportingDirectory.dir("xml").file("result.xml").asFile)
                 required.set(true)
             }
         }
@@ -269,4 +218,4 @@ val Project.unitTestReportingDirectory: Directory
     get() = reportingDirectory.dir("test")
 
 val Project.coverageReportingDirectory: Directory
-    get() = reporting.baseDirectory.get().dir("coverage")
+    get() = reportingDirectory.dir("coverage")

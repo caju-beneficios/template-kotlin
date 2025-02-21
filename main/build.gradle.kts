@@ -3,12 +3,9 @@ plugins {
     application
 }
 
-
 tasks {
     test { jvmArgs("--add-opens", "java.base/java.lang.reflect=ALL-UNNAMED", "-Xmx2048m") }
-    bootJar  {
-        archiveFileName.set("app.${archiveExtension.get()}")
-    }
+    bootJar { archiveFileName.set("app.${archiveExtension.get()}") }
 }
 
 application {
@@ -17,36 +14,36 @@ application {
     applicationDefaultJvmArgs = listOf("-server", "-XX:+UseNUMA", "-XX:+UseParallelGC")
 }
 
-
-
 dependencies {
-    rootProject.subprojects.filter { it != project }.forEach {
-        implementation(it)
-        testFixturesImplementation(it)
+    rootProject.subprojects
+        .filter { it != project }
+        .forEach {
+            implementation(it)
+            testFixturesImplementation(it)
 
-        it.takeIf { it != projects.domain }?.let { proj ->
-            testImplementation(testFixtures(proj))
-            testFixturesImplementation(testFixtures(proj))
+            it.takeIf { it != projects.domain }
+                ?.let { proj ->
+                    testImplementation(testFixtures(proj))
+                    testFixturesImplementation(testFixtures(proj))
+                }
         }
-    }
 
+    implementation(libs.spring.boot.starter.actuator)
+    implementation(libs.spring.boot.starter.data.jpa)
+    implementation(libs.spring.cloud.starter.openfeign)
+    implementation(libs.spring.kafka)
 
-    implementation("org.springframework.boot:spring-boot-starter-actuator")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
-    implementation("org.springframework.kafka:spring-kafka")
+    runtimeOnly(libs.flyway.core)
+    runtimeOnly(libs.flyway.mysql)
 
-    runtimeOnly("org.flywaydb:flyway-core")
-    runtimeOnly("org.flywaydb:flyway-mysql")
-
-    testImplementation("org.springframework.boot:spring-boot-starter-web")
-    testImplementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    testImplementation("org.springframework.boot:spring-boot-testcontainers")
+    testImplementation(libs.spring.boot.starter.web)
+    testImplementation(libs.spring.boot.starter.data.jpa)
+    testImplementation(libs.spring.boot.testcontainers)
+    testImplementation(libs.spring.kafka.test)
     testImplementation(libs.wiremock.standalone)
-    testImplementation("org.testcontainers:junit-jupiter")
-    testImplementation("org.testcontainers:kafka")
-    testImplementation("org.testcontainers:mysql")
-    testImplementation("org.testcontainers:jdbc")
+    testImplementation(libs.testcontainers.junit.jupiter)
+    testImplementation(libs.testcontainers.mysql)
+    testImplementation(libs.testcontainers.jdbc)
 
-    testRuntimeOnly("org.flywaydb:flyway-core")
+    testRuntimeOnly(libs.flyway.core)
 }

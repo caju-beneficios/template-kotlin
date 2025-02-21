@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-VAR_SERVICE_NAME
+  namespace: VAR_NAMESPACE_KUBERNETES
+data:
+  DB_NAME: "" # Fill with your database name
+  DB_HOST: "" # Fill with your database host
+  KAFKA_HOSTS: "b-2.caju-production.wr2smg.c2.kafka.sa-east-1.amazonaws.com:9092,b-1.caju-production.wr2smg.c2.kafka.sa-east-1.amazonaws.com:9092"
+  POOL_SIZE: "10"
+  MINIMUM_IDLE: "10"

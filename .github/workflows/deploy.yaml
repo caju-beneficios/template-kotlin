@@ -1,0 +1,24 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      deploy_environment:
+        description: 'Ambiente de deploy'
+        required: true
+        type: choice
+        options:
+          - staging
+          - production
+
+jobs:
+  deploy:
+    uses: caju-beneficios/workflow/.github/workflows/kotlin-service-deploy.yaml@feat/new-clusters
+    secrets: inherit
+    with:
+      deploy_environment: ${{ inputs.deploy_environment }}
+      cluster_name: ${{ inputs.deploy_environment }}-caju-eks
+    kubernetes_namespace: plataforma #informar namespace da aplicacao
+      jdk_version: 17
+      notification_webhook_link: https://hooks.slack.com/services/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 
+      #(Opcional)Informar webhook canal slack

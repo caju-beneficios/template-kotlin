@@ -1,0 +1,124 @@
+server:
+  port: ${HTTP_PORT:8080}
+  servlet:
+    context-path: /quickstart
+  base-path:
+    prefix: /quickstart
+    ignored-handlers:
+      - springwolf
+
+springdoc:
+  swagger-ui:
+    path: /docs
+    operations-sorter: method
+    tags-sorter: alpha
+    display-request-duration: true
+    syntax-highlight:
+      theme: agate
+    query-config-enabled: true
+  show-login-endpoint: false
+  use-management-port: false
+
+management:
+  endpoint:
+    health:
+      show-details: always
+      show-components: always
+      probes:
+        enabled: true
+  endpoints:
+    web:
+      base-path: /quickstart
+      exposure:
+        include: heapdump,health
+
+aws:
+  region: ${AWS_REGION:sa-east-1}
+  s3:
+    bucket-name: ${AWS_S3_BUCKET_NAME:quickstart}
+    pre-sign-duration: ${AWS_S3_PRE_SIGN_DURATION:60}
+
+
+spring:
+  sql:
+    init:
+      mode: always
+  application:
+    name: Quickstart
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+  datasource:
+    url: jdbc:mysql://${APP_DB_HOST:localhost}:${APP_DB_PORT:3306}/${APP_DB_NAME:quickstart}
+    username: ${APP_DB_USER:root}
+    password: ${APP_DB_PASSWORD:root}
+    hikari:
+      maximum-pool-size: 50
+      minimum-idle: 1
+      transaction-isolation: TRANSACTION_READ_COMMITTED
+      driver-class-name: com.mysql.cj.jdbc.Driver
+  flyway:
+    enabled: true
+    create-schemas: true
+    default-schema: ${DB_NAME:quickstart}
+    url: jdbc:mysql://${APP_DB_HOST:localhost}:${DB_PORT:3306}
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    locations: classpath:db/migrations
+    loggers: slf4j
+  kafka:
+    bootstrap-servers: ${KAFKA_BROKER:localhost:29092}
+    properties:
+      acks: all
+      enable.idempotence: true
+      json.fail.unknown.properties: false
+      json.write.dates.iso8601: true
+      request.timeout.ms: ${KAFKA_REQUEST_TIMEOUT_MS:20000}
+      retries: 5
+      retry.backoff.ms: ${KAFKA_RETRY_BACKOFF_MS:500}
+    consumer:
+      enable-auto-commit: false
+      auto-offset-reset: earliest
+      max-poll-records: 5
+      fetch-min-size: 1
+      properties:
+        max.poll.interval.ms: 6000000
+        spring.json.trusted.packages: br.com.caju
+    listener:
+      async-acks: true
+  jackson:
+    time-zone: UTC
+    date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
+    default-property-inclusion: non_null
+    default-leniency: true
+    deserialization:
+      fail-on-unknown-properties: false
+    serialization:
+      write-dates-as-timestamps: false
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+      - org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration
+
+springwolf:
+  docket:
+    base-package: br.com.caju.eventconsumer
+    info:
+      title: ${spring.application.name}
+      description: Quickstart API
+      version: 1.0x
+    servers:
+      kafka-server:
+        protocol: kafka
+        host: ${spring.kafka.bootstrap-servers}
+  ui:
+    defaults:
+      show-bindings: true
+
+rest-client:
+  person:
+    url:
+      base: ${PERSON_BASE_URL:http://localhost:9561}
+      context-path: ${PERSON_CONTEXT_PATH:/person}

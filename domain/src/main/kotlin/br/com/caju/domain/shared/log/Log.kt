@@ -21,7 +21,6 @@ fun Throwable.applyMDC() = apply {
             MDC.put(::errorKey.name, errorKey)
             data.forEach { (key, value) -> MDC.put(key, value.toString()) }
         }
-
         else -> MDC.put("errorKey", "UNHANDLED_ERROR")
     }
 }

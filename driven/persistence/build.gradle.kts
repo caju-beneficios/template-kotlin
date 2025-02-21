@@ -2,25 +2,25 @@ dependencies {
     implementation(projects.domain)
     testImplementation(projects.domain)
 
-    implementation("org.springframework.boot:spring-boot-starter-actuator")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation(libs.spring.boot.starter.actuator)
+    implementation(libs.spring.boot.starter.data.jpa)
+    implementation(libs.spring.boot.autoconfigure)
 
-    runtimeOnly("com.mysql:mysql-connector-j")
+    testImplementation(libs.spring.boot.testcontainers)
+    testImplementation(libs.spring.boot.starter.data.jpa)
+    testImplementation(libs.spring.boot.autoconfigure)
 
-    testImplementation("org.springframework.boot:spring-boot-testcontainers")
-    testImplementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    testImplementation("org.springframework.boot:spring-boot-autoconfigure")
+    testRuntimeOnly(libs.flyway.core)
+    testRuntimeOnly(libs.flyway.mysql)
 
-    testRuntimeOnly("org.flywaydb:flyway-core")
-    testRuntimeOnly("org.flywaydb:flyway-mysql")
-    testImplementation("org.testcontainers:junit-jupiter")
-    testImplementation("org.testcontainers:mysql")
+    testImplementation(libs.testcontainers.junit.jupiter)
+    testImplementation(libs.testcontainers.mysql)
 
-    implementation("jakarta.persistence:jakarta.persistence-api")
+    implementation(libs.jakarta.persistence.api)
 
-    runtimeOnly("org.flywaydb:flyway-mysql")
+    runtimeOnly(libs.flyway.mysql)
+    runtimeOnly(libs.mysql.connector)
 
     testImplementation(libs.testcontainers.mysql)
     testImplementation(libs.kotest.extensions.now)
-
 }

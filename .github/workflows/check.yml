@@ -1,0 +1,10 @@
+name: Check
+
+on:
+  pull_request:
+    branches: [ '**' ]
+
+jobs:
+  check:
+    uses: caju-beneficios/workflow/.github/workflows/kotlin-check.yaml@main
+    secrets: inherit

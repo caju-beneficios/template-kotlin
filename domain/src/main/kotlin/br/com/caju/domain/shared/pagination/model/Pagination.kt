@@ -11,20 +11,25 @@ import kotlin.math.min
 
 sealed interface Pagination {
 
+    val page: Int
+    val pageSize: Int
+    val order: PaginationOrder
+    val orderBy: String?
+
     data class OffsetPagination(
-        val page: Int,
-        val pageSize: Int,
-        val order: PaginationOrder,
-        val orderBy: String?
+        override val page: Int,
+        override val pageSize: Int,
+        override val order: PaginationOrder,
+        override val orderBy: String?,
     ) : Pagination {
         companion object {}
     }
 
     data class CursorPagination(
-        val page: Int,
-        val pageSize: Int,
-        val order: PaginationOrder,
-        val orderBy: String?
+        override val page: Int,
+        override val pageSize: Int,
+        override val order: PaginationOrder,
+        override val orderBy: String?,
     ) : Pagination {
         companion object {}
     }
@@ -51,7 +56,7 @@ fun CursorPagination.Companion.of(
     maybePage: Int?,
     maybePerPage: Int?,
     maybeOrder: PaginationOrder?,
-    maybeOrderBy: String?
+    maybeOrderBy: String?,
 ): CursorPagination {
     val page = maybePage ?: DEFAULT_PAGE
     val perPage = min(maybePerPage ?: DEFAULT_PAGE_SIZE, MAX_PAGE_SIZE)
@@ -65,7 +70,7 @@ fun OffsetPagination.Companion.of(
     maybePage: Int?,
     maybePerPage: Int?,
     maybeOrder: PaginationOrder? = null,
-    maybeOrderBy: String? = null
+    maybeOrderBy: String? = null,
 ): OffsetPagination {
     val page = maybePage ?: DEFAULT_PAGE
     val perPage = min(maybePerPage ?: DEFAULT_PAGE_SIZE, MAX_PAGE_SIZE)

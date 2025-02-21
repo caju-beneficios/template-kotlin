@@ -9,34 +9,34 @@ sealed class AppException(override val message: String, open val data: Map<Strin
         override val message: String,
         override val errorKey: String,
         override val expected: Boolean,
-        override val data: Map<String, Any?> = emptyMap()
+        override val data: Map<String, Any?> = emptyMap(),
     ) : AppException(message, data)
 
     open class NotFoundException(
         override val message: String,
         override val errorKey: String,
         override val expected: Boolean,
-        override val data: Map<String, Any?> = emptyMap()
+        override val data: Map<String, Any?> = emptyMap(),
     ) : AppException(message, data)
 
     open class AlreadyExistsException(
         override val message: String,
         override val errorKey: String,
         override val expected: Boolean,
-        override val data: Map<String, Any?> = emptyMap()
+        override val data: Map<String, Any?> = emptyMap(),
     ) : AppException(message, data)
 
     open class GeneralException(
         override val message: String,
         override val errorKey: String,
-        override val data: Map<String, Any?> = emptyMap()
+        override val data: Map<String, Any?> = emptyMap(),
     ) : AppException(message, data) {
         override val expected = false
     }
 
     open class TooManyRequestsClientException(
         override val message: String,
-        override val data: Map<String, Any?> = emptyMap()
+        override val data: Map<String, Any?> = emptyMap(),
     ) : AppException(message, data) {
         override val errorKey = ERROR_KEY
         override val expected = true

@@ -12,20 +12,18 @@ import br.com.caju.domain.person.port.driver.UpdatePersonPort
 import br.com.caju.domain.shared.log.annotate
 import br.com.caju.domain.shared.log.logger
 import br.com.caju.domain.shared.transaction.port.driven.TransactionPort
-import org.springframework.stereotype.Component
 import org.springframework.stereotype.Service
 
 @Service
 class UpdatePersonUseCase(
     private val personDataAccessPort: PersonDataAccessPort,
     private val personEventProducerPort: PersonEventProducerPort,
-    private val transactionPort: TransactionPort
+    private val transactionPort: TransactionPort,
 ) : UpdatePersonPort {
     override suspend fun invoke(command: UpdatePersonCommand): Person = run {
         logger.annotate(PERSON_ID, command.id)
-        personDataAccessPort.findByCpf(command.cpf)?.let {
-            updateAndNotify(command.toModel())
-        } ?: throw PersonNotExistsException(command.id)
+        personDataAccessPort.findByCpf(command.cpf)?.let { updateAndNotify(command.toModel()) }
+            ?: throw PersonNotExistsException(command.id)
     }
 
     private suspend fun updateAndNotify(person: Person) = transactionPort {

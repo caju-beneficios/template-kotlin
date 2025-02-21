@@ -1,4 +1,6 @@
 dependencies {
     implementation(projects.domain)
-    implementation("org.springframework.kafka:spring-kafka")
+
+    implementation(libs.aws.sts)
+    implementation(libs.aws.s3)
 }
