@@ -16,8 +16,8 @@ plugins {
     alias(libs.plugins.jacoco)
     alias(libs.plugins.spotless)
     `java-test-fixtures`
-    jacoco
     `version-catalog`
+    `jacoco-report-aggregation`
 }
 
 val patternsToExcludeFromTesting =
@@ -40,7 +40,7 @@ allprojects {
     val libs = rootProject.libs
 
     group = "br.com.caju"
-    version = "0.0.1"
+    version = "0.1.0"
 
     apply {
         plugin("org.jetbrains.kotlin.jvm")
@@ -165,7 +165,7 @@ allprojects {
         }
 
         withType<com.diffplug.gradle.spotless.SpotlessTask> {
-            reporting { baseDir = linterReportingDirectory.asFile }
+            reporting { baseDirectory.set(linterReportingDirectory) }
         }
 
         jacocoTestReport {
@@ -185,26 +185,7 @@ tasks {
 
     check {
         setDependsOn(subprojects.map { it.getTasksByName("check", false) })
-        finalizedBy(jacocoAggregatedReport)
-    }
-
-    jacocoAggregatedReport {
-        reports {
-            csv.apply {
-                outputLocation.set(coverageReportingDirectory.dir("csv").file("result.csv").asFile)
-                required.set(false)
-            }
-
-            html.apply {
-                outputLocation.set(coverageReportingDirectory.dir("html").asFile)
-                required.set(true)
-            }
-
-            xml.apply {
-                outputLocation.set(coverageReportingDirectory.dir("xml").file("result.xml").asFile)
-                required.set(true)
-            }
-        }
+        dependsOn(named("testCodeCoverageReport"))
     }
 }
 

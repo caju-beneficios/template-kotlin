@@ -31,10 +31,10 @@ ij_kotlin_allow_trailing_comma = false
 indent_size = 2
 
 [Makefile]
-indent_style = tab
+indent_style = space
 
 [*.sh]
-indent_style = tab
+indent_style = space
 
 [{*.md,COMMIT_EDITMSG}]
 max_line_length = 72

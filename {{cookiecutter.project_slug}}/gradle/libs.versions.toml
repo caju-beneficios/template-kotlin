@@ -1,45 +1,43 @@
 [versions]
 # https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies
-spring-cloud = "2025.0.0"
+spring-cloud = "2025.1.1"
 # https://mvnrepository.com/artifact/org.springframework.boot/spring-boot
-spring-boot = "3.5.5"
+spring-boot = "4.0.2"
 # https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin
-kotlin = "2.2.10"
+kotlin = "2.2.21"
 # https://plugins.gradle.org/plugin/org.barfuin.gradle.jacocolog
-jacoco = "3.1.0"
+jacoco = "4.0.1"
 # https://mvnrepository.com/artifact/com.diffplug.spotless/spotless-plugin-gradle
-spotless = "7.0.2"
+spotless = "8.2.1"
 # https://mvnrepository.com/artifact/io.kotest/kotest-runner-junit5-jvm
-kotest = "5.9.1"
+kotest = "6.1.2"
 # https://mvnrepository.com/artifact/io.kotest.extensions/kotest-extensions-spring
 kotest-spring = "1.3.0"
 # https://mvnrepository.com/artifact/io.kotest/kotest-extensions-now-jvm
-kotest-now = "5.9.1"
+kotest-now = "6.1.2"
 # https://mvnrepository.com/artifact/org.assertj/assertj-core
-assertj = "3.27.3"
+assertj = "3.27.7"
 # https://mvnrepository.com/artifact/com.ninja-squad/springmockk
-spring-mockk = "4.0.2"
+spring-mockk = "5.0.1"
 # https://mvnrepository.com/artifact/net.logstash.logback/logstash-logback-encoder
-logback-encoder = "8.0"
+logback-encoder = "9.0"
 # https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
-datadog = "1.46.1"
+datadog = "1.58.2"
 # https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-core
-kotlinx = "1.10.1"
+kotlinx = "1.10.2"
 # https://mvnrepository.com/artifact/org.wiremock/wiremock-standalone
-wiremock = "3.12.0"
+wiremock = "3.13.2"
 # https://mvnrepository.com/artifact/org.testcontainers/testcontainers
-testcontainers = "1.20.5"
-# https://mvnrepository.com/artifact/software.amazon.awssdk/aws-core
-aws-sdk = "2.30.25"
+testcontainers = "2.0.3"
 # https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui
-spring-docs = "2.8.5"
+spring-docs = "3.0.1"
 # https://mvnrepository.com/artifact/io.github.springwolf/springwolf-core
-springwolf = "1.10.0"
+springwolf = "2.0.0"
 # https://mvnrepository.com/artifact/org.graalvm.buildtools/native-maven-plugin
-native-build-tools = "0.10.5"
+native-build-tools = "0.11.4"
 
 # https://github.com/google/ksp/releases
-ksp = "2.1.10-1.0.30"
+ksp = "2.3.5"
 
 java = "21"
 
@@ -47,22 +45,22 @@ java = "21"
 # spring
 spring-boot-cloud-dependencies = { version.ref = "spring-cloud", module = "org.springframework.cloud:spring-cloud-dependencies" }
 spring-boot-dependencies = { version.ref = "spring-boot", module = "org.springframework.boot:spring-boot-dependencies" }
-spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" }
-spring-boot-starter-data-jpa = { module = "org.springframework.boot:spring-boot-starter-data-jpa" }
-spring-boot-starter-aop = { module = "org.springframework.boot:spring-boot-starter-aop" }
-spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
-spring-boot-starter-webflux = { module = "org.springframework.boot:spring-boot-starter-webflux" }
-spring-boot-starter-undertow = { module = "org.springframework.boot:spring-boot-starter-undertow" }
-spring-boot-starter-logging = { module = "org.springframework.boot:spring-boot-starter-logging" }
-spring-boot-configuration-processor = { module = "org.springframework.boot:spring-boot-configuration-processor" }
-spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
-spring-boot-starter = { module = "org.springframework.boot:spring-boot-starter" }
-spring-boot-testcontainers = { module = "org.springframework.boot:spring-boot-testcontainers" }
-spring-boot-autoconfigure = { module = "org.springframework.boot:spring-boot-autoconfigure" }
-spring-kafka = { module = "org.springframework.kafka:spring-kafka" }
-spring-kafka-test = { module = "org.springframework.kafka:spring-kafka-test" }
-spring-tx = { module = "org.springframework:spring-tx" }
-spring-cloud-starter-openfeign = { module = "org.springframework.cloud:spring-cloud-starter-openfeign" }
+spring-boot-starter-actuator = { version.ref = "spring-boot", module = "org.springframework.boot:spring-boot-starter-actuator" }
+spring-boot-starter-data-jpa = { version.ref = "spring-boot", module = "org.springframework.boot:spring-boot-starter-data-jpa" }
+spring-boot-starter-aspectj = { version.ref = "spring-boot", module = "org.springframework.boot:spring-boot-starter-aspectj" }
+spring-boot-starter-web = { version.ref = "spring-boot", module = "org.springframework.boot:spring-boot-starter-web" }
+spring-boot-starter-webflux = { version.ref = "spring-boot", module = "org.springframework.boot:spring-boot-starter-webflux" }
+spring-boot-starter-jetty = { version.ref = "spring-boot", module = "org.springframework.boot:spring-boot-starter-jetty" }
+spring-boot-starter-logging = { version.ref = "spring-boot", module = "org.springframework.boot:spring-boot-starter-logging" }
+spring-boot-configuration-processor = { version.ref = "spring-boot", module = "org.springframework.boot:spring-boot-configuration-processor" }
+spring-boot-starter-test = { version.ref = "spring-boot", module = "org.springframework.boot:spring-boot-starter-test" }
+spring-boot-starter = { version.ref = "spring-boot", module = "org.springframework.boot:spring-boot-starter" }
+spring-boot-testcontainers = { version.ref = "spring-boot", module = "org.springframework.boot:spring-boot-testcontainers" }
+spring-boot-autoconfigure = { version.ref = "spring-boot", module = "org.springframework.boot:spring-boot-autoconfigure" }
+spring-kafka = { version.ref = "spring-boot", module = "org.springframework.kafka:spring-kafka" }
+spring-kafka-test = { version.ref = "spring-boot", module = "org.springframework.kafka:spring-kafka-test" }
+spring-tx = { version.ref = "spring-boot", module = "org.springframework:spring-tx" }
+spring-cloud-starter-openfeign = { version.ref = "spring-cloud", module = "org.springframework.cloud:spring-cloud-starter-openfeign" }
 
 # spring extras
 springdoc-openapi-starter-webmvc-ui = { version.ref = "spring-docs", module = "org.springdoc:springdoc-openapi-starter-webmvc-ui" }
@@ -110,9 +108,6 @@ jackson-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin"
 jackson-jdk8 = { module = "com.fasterxml.jackson.datatype:jackson-datatype-jdk8" }
 jackson-jsr310 = { module = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310" }
 
-# aws
-aws-s3 = { version.ref = "aws-sdk", module = "software.amazon.awssdk:s3" }
-aws-sts = { version.ref = "aws-sdk", module = "software.amazon.awssdk:sts" }
 
 [plugins]
 

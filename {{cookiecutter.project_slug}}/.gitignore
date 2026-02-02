@@ -87,14 +87,44 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-# MICRONAUT #
-.micronaut
-
 # MISC #
-.sdkmanrc
 *.jfr
 *.log
 .env
 .run
 .temp/
 .docker/locust/mappings/__pycache__/
+
+### Spring Boot ###
+# Spring Boot build output
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# Spring Boot DevTools
+spring-boot-devtools.properties
+
+# Spring Boot application properties with secrets
+application-local.properties
+application-local.yml
+application-secrets.properties
+application-secrets.yml
+
+# Spring Boot actuator
+actuator/
+
+### Claude AI ###
+# Claude Desktop app data
+.claude/
+claude-data/
+.clauderc
+
+# Claude conversation exports
+claude-conversations/
+*.claude-export
+
+# Claude API keys and configs
+.claude-api-key
+claude-config.json
+.claude-settings.json

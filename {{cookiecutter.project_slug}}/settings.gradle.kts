@@ -1,26 +1,21 @@
-rootProject.name = "quickstart-kotlin-spring"
+rootProject.name = "{{ cookiecutter.project_slug }}"
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-include("main", "domain")
+include("domain")
+project(":domain").projectDir = file("domain")
 
 // DRIVER
-include("rest-server", "event-consumer")
+include("http-api", "kafka-consumer")
 
-project(":rest-server").projectDir = file("driver/rest-server")
-
-project(":event-consumer").projectDir = file("driver/event-consumer")
+project(":http-api").projectDir = file("driver/http-api")
+project(":kafka-consumer").projectDir = file("driver/kafka-consumer")
 
 // DRIVEN
-include("persistence", "storage", "event-producer", "rest-client")
+include("postgresql-persistence")
 
-project(":persistence").projectDir = file("driven/persistence")
+project(":postgresql-persistence").projectDir = file("driven/postgresql-persistence")
 
-project(":storage").projectDir = file("driven/storage")
-
-project(":event-producer").projectDir = file("driven/event-producer")
-
-project(":rest-client").projectDir = file("driven/rest-client")
 
 dependencyResolutionManagement {
     repositories {
