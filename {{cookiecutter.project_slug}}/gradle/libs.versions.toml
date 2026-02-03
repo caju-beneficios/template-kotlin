@@ -73,15 +73,15 @@ jakarta-persistence-api = { module = "jakarta.persistence:jakarta.persistence-ap
 
 # flyway
 flyway-core = { module = "org.flywaydb:flyway-core" }
-flyway-mysql = { module = "org.flywaydb:flyway-mysql" }
+flyway-postgresql = { module = "org.flywaydb:flyway-database-postgresql" }
 
 # testcontainers
 testcontainers-junit-jupiter = { module = "org.testcontainers:junit-jupiter", version.ref = "testcontainers" }
-testcontainers-mysql = { module = "org.testcontainers:mysql", version.ref = "testcontainers" }
+testcontainers-postgresql = { module = "org.testcontainers:postgresql", version.ref = "testcontainers" }
 testcontainers-jdbc = { module = "org.testcontainers:jdbc", version.ref = "testcontainers" }
 
-# mysql
-mysql-connector = { module = "com.mysql:mysql-connector-j" }
+# postgresql
+postgresql-connector = { module = "org.postgresql:postgresql" }
 
 # kotlin
 kotlinx-coroutines-core = { version.ref = "kotlinx", module = "org.jetbrains.kotlinx:kotlinx-coroutines-core" }
