@@ -17,9 +17,9 @@ application {
 dependencies {
     implementation(projects.domain)
 
-    implementation(libs.spring.boot.starter.aop)
+    implementation(libs.spring.boot.starter.aspectj)
 
-    implementation(libs.spring.boot.starter.undertow)
+    implementation(libs.spring.boot.starter.jetty)
     implementation(libs.springdoc.openapi.starter.webmvc.ui)
 
     implementation(libs.spring.boot.starter.actuator)

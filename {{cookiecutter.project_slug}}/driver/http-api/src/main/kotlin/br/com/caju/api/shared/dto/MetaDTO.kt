@@ -1,4 +1,4 @@
-package br.com.caju.restserver.shared.dto
+package br.com.caju.api.shared.dto
 
 import com.fasterxml.jackson.annotation.JsonSubTypes
 import com.fasterxml.jackson.annotation.JsonTypeInfo

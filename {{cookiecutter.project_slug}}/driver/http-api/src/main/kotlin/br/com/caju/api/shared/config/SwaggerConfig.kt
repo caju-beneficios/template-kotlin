@@ -1,4 +1,4 @@
-package br.com.caju.restserver.shared.config
+package br.com.caju.api.shared.config
 
 import org.springdoc.core.models.GroupedOpenApi
 import org.springframework.context.annotation.Bean
@@ -9,8 +9,8 @@ class SwaggerConfig {
     @Bean
     fun api(): GroupedOpenApi =
         GroupedOpenApi.builder()
-            .group("quickstart")
+            .group("{{cookiecutter.project_slug}}")
             .pathsToMatch("/**")
-            .displayName("quickstart")
+            .displayName("{{cookiecutter.project_name}}")
             .build()
 }

@@ -1,10 +1,10 @@
-package br.com.caju.restserver.shared.dto
+package br.com.caju.api.shared.dto
 
 import br.com.caju.domain.shared.pagination.model.PaginatedModel
 import br.com.caju.domain.shared.pagination.model.Pagination
 import br.com.caju.domain.shared.pagination.model.Pagination.CursorPagination
 import br.com.caju.domain.shared.pagination.model.Pagination.OffsetPagination
-import br.com.caju.restserver.shared.dto.PaginateResponse.paginate
+import br.com.caju.api.shared.dto.PaginateResponse.paginate
 
 data class PaginatedResponseDTO<T>(val items: List<T>, val meta: MetaDTO)
 
@@ -49,9 +49,9 @@ object PaginateResponse {
     }
 }
 
-inline fun <reified T : Any> PaginatedModel<T>.toDTO(
-    pagination: PaginationDTO
-): PaginatedResponseDTO<T> = page.paginate(totalPages, totalItems, pagination.toOffsetModel())
+inline fun <reified T : Any> PaginatedModel<T>.toResponseDTO(
+    pagination: Pagination
+): PaginatedResponseDTO<T> = page.paginate(totalPages, totalItems, pagination)
 
 inline fun <From : Any, To : Any> PaginatedResponseDTO<From>.map(
     transform: (From) -> To

@@ -1,4 +1,4 @@
-package br.com.caju.restserver.shared.config
+package br.com.caju.api.shared.config
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 

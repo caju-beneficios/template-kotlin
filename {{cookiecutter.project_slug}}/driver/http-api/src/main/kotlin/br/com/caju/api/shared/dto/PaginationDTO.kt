@@ -1,4 +1,4 @@
-package br.com.caju.restserver.shared.dto
+package br.com.caju.api.shared.dto
 
 import br.com.caju.domain.shared.pagination.model.Pagination
 import br.com.caju.domain.shared.pagination.model.PaginationOrder

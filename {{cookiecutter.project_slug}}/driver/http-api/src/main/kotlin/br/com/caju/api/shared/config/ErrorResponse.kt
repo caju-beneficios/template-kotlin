@@ -1,4 +1,4 @@
-package br.com.caju.restserver.shared.config
+package br.com.caju.api.shared.config
 
 import br.com.caju.domain.shared.exception.AppException
 import org.springframework.web.context.request.ServletWebRequest
