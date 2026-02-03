@@ -1,7 +1,13 @@
 {
-  "project_name": "",
-  "team_github_handle": "@caju/team-name",
+  "project_name": "quickstart-service",
   "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '-').replace('_', '-') }}",
-  "project_description": "{{ cookiecutter.project_name }} - A Spring Boot microservice",
+  "team_github_handle": "@caju-beneficios/backend-platform",
+  "resource_name": "Article",
+  "resource_name_lower": "{{ cookiecutter.resource_name.lower() }}",
+  "resource_name_camel": "{{ cookiecutter.resource_name }}",
+  "resource_name_plural": "{{ cookiecutter.resource_name }}s",
+  "rest_endpoint_version": "v1",
+  "include_kafka_events": "y",
+  "include_pagination": "y",
   "_copy_without_render": ["*.tmpl"]
 }
