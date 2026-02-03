@@ -1,9 +1,9 @@
 server:
   port: ${HTTP_PORT:8080}
   servlet:
-    context-path: /quickstart
+    context-path: /{{cookiecutter.project_slug}}
   base-path:
-    prefix: /quickstart
+    prefix: /{{cookiecutter.project_slug}}
     ignored-handlers:
       - springwolf
 
@@ -28,46 +28,46 @@ management:
         enabled: true
   endpoints:
     web:
-      base-path: /quickstart
+      base-path: /{{cookiecutter.project_slug}}
       exposure:
         include: heapdump,health
 
 aws:
   region: ${AWS_REGION:sa-east-1}
   s3:
-    bucket-name: ${AWS_S3_BUCKET_NAME:quickstart}
+    bucket-name: ${AWS_S3_BUCKET_NAME:{{cookiecutter.project_slug}}}
     pre-sign-duration: ${AWS_S3_PRE_SIGN_DURATION:60}
-
 
 spring:
   sql:
     init:
       mode: always
   application:
-    name: Quickstart
+    name: {{cookiecutter.project_name}}
   jpa:
     open-in-view: false
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     properties:
       hibernate:
         format_sql: true
   datasource:
-    url: jdbc:mysql://${APP_DB_HOST:localhost}:${APP_DB_PORT:3306}/${APP_DB_NAME:quickstart}
-    username: ${APP_DB_USER:root}
-    password: ${APP_DB_PASSWORD:root}
+    url: jdbc:postgresql://${APP_DB_HOST:localhost}:${APP_DB_PORT:5432}/${APP_DB_NAME:{{cookiecutter.project_slug.replace('-', '_')}}}
+    username: ${APP_DB_USER:{{cookiecutter.project_slug.replace('-', '_')}}_user}
+    password: ${APP_DB_PASSWORD:{{cookiecutter.project_slug.replace('-', '_')}}_password}
     hikari:
       maximum-pool-size: 50
       minimum-idle: 1
       transaction-isolation: TRANSACTION_READ_COMMITTED
-      driver-class-name: com.mysql.cj.jdbc.Driver
+      driver-class-name: org.postgresql.Driver
   flyway:
     enabled: true
     create-schemas: true
-    default-schema: ${DB_NAME:quickstart}
-    url: jdbc:mysql://${APP_DB_HOST:localhost}:${DB_PORT:3306}
+    default-schema: ${DB_SCHEMA:public}
+    url: jdbc:postgresql://${APP_DB_HOST:localhost}:${DB_PORT:5432}/${APP_DB_NAME:{{cookiecutter.project_slug.replace('-', '_')}}}
     user: ${spring.datasource.username}
     password: ${spring.datasource.password}
-    locations: classpath:db/migrations
-    loggers: slf4j
+    locations: classpath:db/migration
+    loggers: slf4j{% if cookiecutter.include_kafka_events == "y" %}
   kafka:
     bootstrap-servers: ${KAFKA_BROKER:localhost:29092}
     properties:
@@ -87,7 +87,7 @@ spring:
         max.poll.interval.ms: 6000000
         spring.json.trusted.packages: br.com.caju
     listener:
-      async-acks: true
+      async-acks: true{% endif %}
   jackson:
     time-zone: UTC
     date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
@@ -101,13 +101,13 @@ spring:
     exclude:
       - org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
       - org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration
-
+{% if cookiecutter.include_kafka_events == "y" %}
 springwolf:
   docket:
     base-package: br.com.caju.eventconsumer
     info:
       title: ${spring.application.name}
-      description: Quickstart API
+      description: {{cookiecutter.project_name}} API
       version: 1.0x
     servers:
       kafka-server:
@@ -116,9 +116,9 @@ springwolf:
   ui:
     defaults:
       show-bindings: true
-
+{% endif %}
 rest-client:
-  person:
+  {{cookiecutter.resource_name_lower}}:
     url:
-      base: ${PERSON_BASE_URL:http://localhost:9561}
-      context-path: ${PERSON_CONTEXT_PATH:/person}
+      base: ${{ "${" }}{{cookiecutter.resource_name.upper()}}_BASE_URL:http://localhost:9561{{ "}" }}
+      context-path: ${{ "${" }}{{cookiecutter.resource_name.upper()}}_CONTEXT_PATH:/{{cookiecutter.resource_name_lower}}{{ "}" }}
