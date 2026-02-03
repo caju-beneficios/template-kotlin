@@ -2,10 +2,6 @@ server:
   port: ${HTTP_PORT:8080}
   servlet:
     context-path: /{{cookiecutter.project_slug}}
-  base-path:
-    prefix: /{{cookiecutter.project_slug}}
-    ignored-handlers:
-      - springwolf
 
 springdoc:
   swagger-ui:
@@ -16,6 +12,8 @@ springdoc:
     syntax-highlight:
       theme: agate
     query-config-enabled: true
+  api-docs:
+    path: /v3/api-docs
   show-login-endpoint: false
   use-management-port: false
 
@@ -28,7 +26,7 @@ management:
         enabled: true
   endpoints:
     web:
-      base-path: /{{cookiecutter.project_slug}}
+      base-path: /
       exposure:
         include: heapdump,health
 
@@ -95,8 +93,6 @@ spring:
     default-leniency: true
     deserialization:
       fail-on-unknown-properties: false
-    serialization:
-      write-dates-as-timestamps: false
   autoconfigure:
     exclude:
       - org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration

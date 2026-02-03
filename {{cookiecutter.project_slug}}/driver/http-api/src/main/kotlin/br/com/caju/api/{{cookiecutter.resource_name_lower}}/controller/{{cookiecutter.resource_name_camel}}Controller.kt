@@ -5,6 +5,7 @@ import br.com.caju.domain.{{cookiecutter.resource_name_lower}}.port.driver.Get{{
 import br.com.caju.domain.{{cookiecutter.resource_name_lower}}.port.driver.Update{{cookiecutter.resource_name_camel}}Port{% if cookiecutter.include_pagination == 'y' %}
 import br.com.caju.domain.{{cookiecutter.resource_name_lower}}.port.driver.GetAll{{cookiecutter.resource_name_plural}}PaginatedPort
 import br.com.caju.api.shared.dto.PaginationDTO
+import br.com.caju.api.shared.dto.PaginationOrderDTO
 import br.com.caju.api.shared.dto.toOffsetModel{% endif %}{% if cookiecutter.resource_name == 'Article' %}
 import br.com.caju.api.{{cookiecutter.resource_name_lower}}.dto.{{cookiecutter.resource_name_camel}}RequestDTO
 import br.com.caju.api.{{cookiecutter.resource_name_lower}}.dto.{{cookiecutter.resource_name_camel}}ResponseDTO
@@ -29,7 +30,7 @@ import org.springframework.web.bind.annotation.RequestMapping{% if cookiecutter.
 import org.springframework.web.bind.annotation.RequestParam{% endif %}
 import org.springframework.web.bind.annotation.RestController
 
-@RequestMapping("/{{cookiecutter.rest_endpoint_version}}/{{cookiecutter.resource_name_lower}}")
+@RequestMapping("/{{cookiecutter.rest_endpoint_version}}/{{cookiecutter.resource_name_plural.lower()}}")
 @RestController
 class {{cookiecutter.resource_name_camel}}Controller(
     private val create{{cookiecutter.resource_name_camel}}Port: Create{{cookiecutter.resource_name_camel}}Port,
@@ -63,7 +64,13 @@ class {{cookiecutter.resource_name_camel}}Controller(
     // suspend fun getById(@PathVariable("id") id: UUID) = get{{cookiecutter.resource_name_camel}}ByIdPort.getById(id).toDTO(){% endif %}{% if cookiecutter.include_pagination == 'y' %}
 
     @GetMapping()
-    suspend fun getAll(pagination: PaginationDTO): br.com.caju.api.shared.dto.PaginatedResponseDTO<{{cookiecutter.resource_name_camel}}ResponseDTO> {
+    suspend fun getAll(
+        @RequestParam(value = "page", required = false) page: Int?,
+        @RequestParam(value = "perPage", required = false) perPage: Int?,
+        @RequestParam(value = "orderBy", required = false) orderBy: String?,
+        @RequestParam(value = "order", required = false) order: PaginationOrderDTO?,
+    ): br.com.caju.api.shared.dto.PaginatedResponseDTO<{{cookiecutter.resource_name_camel}}ResponseDTO> {
+        val pagination = PaginationDTO(page, perPage, orderBy, order)
         val paginationModel = pagination.toOffsetModel()
         return getAll{{cookiecutter.resource_name_plural}}PaginatedPort.getAll(paginationModel)
             .toResponseDTO(paginationModel)

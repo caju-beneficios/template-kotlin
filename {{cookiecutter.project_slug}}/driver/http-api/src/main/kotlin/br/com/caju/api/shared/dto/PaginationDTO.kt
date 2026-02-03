@@ -5,7 +5,6 @@ import br.com.caju.domain.shared.pagination.model.PaginationOrder
 import br.com.caju.domain.shared.pagination.model.of
 import com.fasterxml.jackson.annotation.JsonValue
 import io.swagger.v3.oas.annotations.media.Schema
-import org.springframework.web.bind.annotation.RequestParam
 
 enum class PaginationOrderDTO(@JsonValue val value: String) {
     ASC("Asc"),
@@ -13,10 +12,10 @@ enum class PaginationOrderDTO(@JsonValue val value: String) {
 }
 
 class PaginationDTO(
-    @Schema(name = "Page", description = "Current page") @RequestParam val page: Int?,
-    @Schema(name = "PerPage", description = "Registers per page") @RequestParam val perPage: Int?,
-    @Schema(name = "OrderBy", description = "Field to order by") @RequestParam val orderBy: String?,
-    @Schema(name = "Order", description = "Order of the registers") val order: PaginationOrderDTO?,
+    @Schema(name = "page", description = "Current page") val page: Int?,
+    @Schema(name = "perPage", description = "Registers per page") val perPage: Int?,
+    @Schema(name = "orderBy", description = "Field to order by") val orderBy: String?,
+    @Schema(name = "order", description = "Order of the registers") val order: PaginationOrderDTO?,
 )
 
 fun PaginationDTO.toOffsetModel() =
