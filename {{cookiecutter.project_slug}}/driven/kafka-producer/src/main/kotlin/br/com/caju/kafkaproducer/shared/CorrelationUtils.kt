@@ -1,4 +1,4 @@
-package br.com.caju.eventproducer.shared
+package br.com.caju.kafkaproducer.shared
 
 import br.com.caju.domain.shared.config.Metadata.CORRELATION_ID
 import br.com.caju.domain.shared.config.Metadata.REQUESTER_ID
@@ -11,7 +11,7 @@ import org.apache.kafka.common.header.internals.RecordHeader
 import org.apache.kafka.common.header.internals.RecordHeaders
 import org.springframework.kafka.core.KafkaTemplate
 
-suspend fun <K, V> KafkaTemplate<K, V>.sendCorrelated(
+suspend fun <K : Any, V : Any> KafkaTemplate<K, V>.sendCorrelated(
     topic: String,
     key: K,
     value: V,

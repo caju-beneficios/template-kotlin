@@ -16,7 +16,8 @@ application {
 
 dependencies {
     implementation(projects.domain)
-    implementation(projects.postgresqlPersistence)
+    implementation(projects.postgresqlPersistence){% if cookiecutter.include_kafka_events == 'y' %}
+    implementation(projects.kafkaProducer){% endif %}
 
     implementation(libs.spring.boot.starter.aspectj)
 

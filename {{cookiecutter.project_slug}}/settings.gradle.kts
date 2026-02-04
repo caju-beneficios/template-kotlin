@@ -12,9 +12,10 @@ project(":http-api").projectDir = file("driver/http-api")
 project(":kafka-consumer").projectDir = file("driver/kafka-consumer")
 
 // DRIVEN
-include("postgresql-persistence")
+include("postgresql-persistence"{% if cookiecutter.include_kafka_events == 'y' %}, "kafka-producer"{% endif %})
 
-project(":postgresql-persistence").projectDir = file("driven/postgresql-persistence")
+project(":postgresql-persistence").projectDir = file("driven/postgresql-persistence"){% if cookiecutter.include_kafka_events == 'y' %}
+project(":kafka-producer").projectDir = file("driven/kafka-producer"){% endif %}
 
 
 dependencyResolutionManagement {

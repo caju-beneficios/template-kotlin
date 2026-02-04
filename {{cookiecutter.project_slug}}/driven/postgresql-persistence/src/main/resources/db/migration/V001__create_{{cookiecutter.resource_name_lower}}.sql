@@ -1,4 +1,4 @@
-CREATE TABLE {{cookiecutter.resource_name_lower}}
+CREATE TABLE {{cookiecutter.resource_name_plural.lower()}}
 (
     id          VARCHAR(36)  NOT NULL PRIMARY KEY,
     version     INTEGER      NOT NULL,{% if cookiecutter.resource_name_lower == 'article' %}

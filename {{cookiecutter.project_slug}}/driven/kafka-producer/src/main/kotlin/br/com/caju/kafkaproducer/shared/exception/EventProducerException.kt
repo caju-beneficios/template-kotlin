@@ -1,4 +1,4 @@
-package br.com.caju.eventproducer.shared.exception
+package br.com.caju.kafkaproducer.shared.exception
 
 import br.com.caju.domain.shared.exception.AppException.GeneralException
 

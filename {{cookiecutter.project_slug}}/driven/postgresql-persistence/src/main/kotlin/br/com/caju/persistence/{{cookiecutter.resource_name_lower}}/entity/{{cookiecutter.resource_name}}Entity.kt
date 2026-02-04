@@ -10,7 +10,7 @@ import java.util.UUID
 import org.hibernate.annotations.JdbcTypeCode
 import org.hibernate.type.SqlTypes.VARCHAR
 
-@Entity(name = "{{cookiecutter.resource_name}}")
+@Entity(name = "{{cookiecutter.resource_name_plural.lower()}}")
 @Table
 data class {{cookiecutter.resource_name}}Entity(
     @Id @JdbcTypeCode(VARCHAR) val id: UUID,
