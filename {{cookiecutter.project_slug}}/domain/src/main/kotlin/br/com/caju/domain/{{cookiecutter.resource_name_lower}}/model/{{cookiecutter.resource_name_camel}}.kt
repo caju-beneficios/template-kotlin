@@ -1,4 +1,4 @@
-package br.com.caju.domain.{{cookiecutter.resource_name.lower()}}.model
+package br.com.caju.domain.{{cookiecutter.resource_name_lower}}.model
 
 import java.util.UUID
 import java.time.LocalDateTime

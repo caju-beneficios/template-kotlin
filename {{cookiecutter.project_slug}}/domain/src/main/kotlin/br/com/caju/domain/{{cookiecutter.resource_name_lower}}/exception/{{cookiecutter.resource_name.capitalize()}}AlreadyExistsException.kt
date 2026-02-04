@@ -1,4 +1,4 @@
-package br.com.caju.domain.{{cookiecutter.resource_name.lower()}}.exception
+package br.com.caju.domain.{{cookiecutter.resource_name_lower}}.exception
 
 import br.com.caju.domain.shared.exception.AppException
 

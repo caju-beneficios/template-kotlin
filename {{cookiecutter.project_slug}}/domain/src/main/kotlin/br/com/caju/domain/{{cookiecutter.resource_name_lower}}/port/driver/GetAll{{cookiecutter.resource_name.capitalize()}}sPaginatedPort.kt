@@ -1,6 +1,6 @@
-package br.com.caju.domain.{{cookiecutter.resource_name.lower()}}.port.driver{% if cookiecutter.include_pagination == 'y' %}
+package br.com.caju.domain.{{cookiecutter.resource_name_lower}}.port.driver{% if cookiecutter.include_pagination == 'y' %}
 
-import br.com.caju.domain.{{cookiecutter.resource_name.lower()}}.model.{{cookiecutter.resource_name.capitalize()}}
+import br.com.caju.domain.{{cookiecutter.resource_name_lower}}.model.{{cookiecutter.resource_name.capitalize()}}
 import br.com.caju.domain.shared.pagination.model.PaginatedModel
 import br.com.caju.domain.shared.pagination.model.Pagination
 

@@ -1,14 +1,14 @@
-package br.com.caju.domain.{{cookiecutter.resource_name.lower()}}.port.driven
+package br.com.caju.domain.{{cookiecutter.resource_name_lower}}.port.driven
 
-import br.com.caju.domain.{{cookiecutter.resource_name.lower()}}.model.{{cookiecutter.resource_name.capitalize()}}{% if cookiecutter.include_pagination == 'y' %}
+import br.com.caju.domain.{{cookiecutter.resource_name_lower}}.model.{{cookiecutter.resource_name.capitalize()}}{% if cookiecutter.include_pagination == 'y' %}
 import br.com.caju.domain.shared.pagination.model.PaginatedModel
 import br.com.caju.domain.shared.pagination.model.Pagination{% endif %}
 import java.util.UUID
 
 interface {{cookiecutter.resource_name.capitalize()}}DataAccessPort {
-    suspend fun save({{cookiecutter.resource_name.lower()}}: {{cookiecutter.resource_name.capitalize()}}): {{cookiecutter.resource_name.capitalize()}}
+    suspend fun save({{cookiecutter.resource_name_lower}}: {{cookiecutter.resource_name.capitalize()}}): {{cookiecutter.resource_name.capitalize()}}
 
-    suspend fun update({{cookiecutter.resource_name.lower()}}: {{cookiecutter.resource_name.capitalize()}}): {{cookiecutter.resource_name.capitalize()}}{% if cookiecutter.include_pagination == 'y' %}
+    suspend fun update({{cookiecutter.resource_name_lower}}: {{cookiecutter.resource_name.capitalize()}}): {{cookiecutter.resource_name.capitalize()}}{% if cookiecutter.include_pagination == 'y' %}
 
     suspend fun findAll(pagination: Pagination): PaginatedModel<{{cookiecutter.resource_name.capitalize()}}>{% endif %}
 
