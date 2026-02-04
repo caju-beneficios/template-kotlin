@@ -56,16 +56,7 @@ spring:
       maximum-pool-size: 50
       minimum-idle: 1
       transaction-isolation: TRANSACTION_READ_COMMITTED
-      driver-class-name: org.postgresql.Driver
-  flyway:
-    enabled: true
-    create-schemas: true
-    default-schema: ${DB_SCHEMA:public}
-    url: jdbc:postgresql://${APP_DB_HOST:localhost}:${DB_PORT:5432}/${APP_DB_NAME:{{cookiecutter.project_slug.replace('-', '_')}}}
-    user: ${spring.datasource.username}
-    password: ${spring.datasource.password}
-    locations: classpath:db/migration
-    loggers: slf4j{% if cookiecutter.include_kafka_events == "y" %}
+      driver-class-name: org.postgresql.Driver{% if cookiecutter.include_kafka_events == "y" %}
   kafka:
     bootstrap-servers: ${KAFKA_BROKER:localhost:29092}
     properties:

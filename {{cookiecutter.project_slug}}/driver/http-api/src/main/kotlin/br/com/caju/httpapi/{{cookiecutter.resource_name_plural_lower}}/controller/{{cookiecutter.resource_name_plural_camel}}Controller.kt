@@ -30,9 +30,9 @@ import org.springframework.web.bind.annotation.RequestMapping{% if cookiecutter.
 import org.springframework.web.bind.annotation.RequestParam{% endif %}
 import org.springframework.web.bind.annotation.RestController
 
-@RequestMapping("/{{cookiecutter.rest_endpoint_version}}/{{cookiecutter.resource_name_plural.lower()}}")
+@RequestMapping("/{{cookiecutter.rest_endpoint_version}}/{{cookiecutter.resource_name_plural_lower}}")
 @RestController
-class {{cookiecutter.resource_name_camel}}Controller(
+class {{cookiecutter.resource_name_plural_camel}}Controller(
     private val create{{cookiecutter.resource_name_camel}}Port: Create{{cookiecutter.resource_name_camel}}Port,
     private val update{{cookiecutter.resource_name_camel}}Port: Update{{cookiecutter.resource_name_camel}}Port,
     private val get{{cookiecutter.resource_name_camel}}ByIdPort: Get{{cookiecutter.resource_name_camel}}ByIdPort,{% if cookiecutter.include_pagination == 'y' %}
