@@ -41,7 +41,7 @@ spring:
     init:
       mode: always
   application:
-    name: {{cookiecutter.project_name}}
+    name: { { cookiecutter.project_name } }
   jpa:
     open-in-view: false
     database-platform: org.hibernate.dialect.PostgreSQLDialect
@@ -88,24 +88,9 @@ spring:
     exclude:
       - org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
       - org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration
-{% if cookiecutter.include_kafka_events == "y" %}
-springwolf:
-  docket:
-    base-package: br.com.caju.eventconsumer
-    info:
-      title: ${spring.application.name}
-      description: {{cookiecutter.project_name}} API
-      version: 1.0x
-    servers:
-      kafka-server:
-        protocol: kafka
-        host: ${spring.kafka.bootstrap-servers}
-  ui:
-    defaults:
-      show-bindings: true
-{% endif %}
+
 rest-client:
-  {{cookiecutter.resource_name_lower}}:
+  { { cookiecutter.resource_name_lower } }:
     url:
       base: ${{ "${" }}{{cookiecutter.resource_name.upper()}}_BASE_URL:http://localhost:9561{{ "}" }}
       context-path: ${{ "${" }}{{cookiecutter.resource_name.upper()}}_CONTEXT_PATH:/{{cookiecutter.resource_name_lower}}{{ "}" }}
