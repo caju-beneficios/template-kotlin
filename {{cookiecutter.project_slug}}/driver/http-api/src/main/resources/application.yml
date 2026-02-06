@@ -41,10 +41,9 @@ spring:
     init:
       mode: always
   application:
-    name: {{ cookiecutter.project_name }}
+    name: {{ cookiecutter.project_name }}-http-api
   jpa:
     open-in-view: false
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
     properties:
       hibernate:
         format_sql: true

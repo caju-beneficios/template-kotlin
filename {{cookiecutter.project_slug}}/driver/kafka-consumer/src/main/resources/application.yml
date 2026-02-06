@@ -11,8 +11,25 @@ management:
         include: health,info
 
 spring:
+  sql:
+    init:
+      mode: always
   application:
-    name: caju-slack-mode-kafka-consumer
+    name: {{ cookiecutter.project_name }}-consumer
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+  datasource:
+    url: jdbc:postgresql://${APP_DB_HOST:localhost}:${APP_DB_PORT:5432}/${APP_DB_NAME:{{cookiecutter.project_slug.replace('-', '_')}}}
+    username: ${APP_DB_USER:{{cookiecutter.project_slug.replace('-', '_')}}_user}
+    password: ${APP_DB_PASSWORD:{{cookiecutter.project_slug.replace('-', '_')}}_password}
+    hikari:
+      maximum-pool-size: 50
+      minimum-idle: 1
+      transaction-isolation: TRANSACTION_READ_COMMITTED
+      driver-class-name: org.postgresql.Driver
   kafka:
     bootstrap-servers: ${KAFKA_BROKER:localhost:29092}
     properties:

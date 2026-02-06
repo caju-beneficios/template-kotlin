@@ -16,6 +16,7 @@ application {
 
 dependencies {
     implementation(projects.domain)
+    implementation(projects.postgresqlPersistence)
 
     implementation(libs.spring.kafka)
     implementation(libs.spring.boot.starter.aspectj)

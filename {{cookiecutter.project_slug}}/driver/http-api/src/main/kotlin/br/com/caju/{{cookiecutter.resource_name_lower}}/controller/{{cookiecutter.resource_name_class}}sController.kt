@@ -11,23 +11,23 @@ import br.com.caju.shared.dto.PaginationOrderDTO
 import br.com.caju.shared.dto.toOffsetModel
 {% endif %}
 {% if cookiecutter.resource_name == 'Article' %}
-import br.com.caju.{{cookiecutter.resource_name_lower}}s.dto.{{cookiecutter.resource_name_class}}RequestDTO
-import br.com.caju.{{cookiecutter.resource_name_lower}}s.dto.{{cookiecutter.resource_name_class}}ResponseDTO
-import br.com.caju.{{cookiecutter.resource_name_lower}}s.dto.toCreateCommand
-import br.com.caju.{{cookiecutter.resource_name_lower}}s.dto.toUpdateCommand
-import br.com.caju.{{cookiecutter.resource_name_lower}}s.dto.toDTO
+import br.com.caju.{{cookiecutter.resource_name_lower}}.dto.{{cookiecutter.resource_name_class}}RequestDTO
+import br.com.caju.{{cookiecutter.resource_name_lower}}.dto.{{cookiecutter.resource_name_class}}ResponseDTO
+import br.com.caju.{{cookiecutter.resource_name_lower}}.dto.toCreateCommand
+import br.com.caju.{{cookiecutter.resource_name_lower}}.dto.toUpdateCommand
+import br.com.caju.{{cookiecutter.resource_name_lower}}.dto.toDTO
 {% if cookiecutter.include_pagination == 'y' %}
-import br.com.caju.{{cookiecutter.resource_name_lower}}s.dto.toResponseDTO
+import br.com.caju.{{cookiecutter.resource_name_lower}}.dto.toResponseDTO
 {% endif %}
 {% else %}
 // TODO: Create and import your DTOs here
-// import br.com.caju.{{cookiecutter.resource_name_lower}}s.dto.{{cookiecutter.resource_name_class}}RequestDTO
-// import br.com.caju.{{cookiecutter.resource_name_lower}}s.dto.{{cookiecutter.resource_name_class}}ResponseDTO
-// import br.com.caju.{{cookiecutter.resource_name_lower}}s.dto.toCreateCommand
-// import br.com.caju.{{cookiecutter.resource_name_lower}}s.dto.toUpdateCommand
-// import br.com.caju.{{cookiecutter.resource_name_lower}}s.dto.toDTO
+// import br.com.caju.{{cookiecutter.resource_name_lower}}.dto.{{cookiecutter.resource_name_class}}RequestDTO
+// import br.com.caju.{{cookiecutter.resource_name_lower}}.dto.{{cookiecutter.resource_name_class}}ResponseDTO
+// import br.com.caju.{{cookiecutter.resource_name_lower}}.dto.toCreateCommand
+// import br.com.caju.{{cookiecutter.resource_name_lower}}.dto.toUpdateCommand
+// import br.com.caju.{{cookiecutter.resource_name_lower}}.dto.toDTO
 {% if cookiecutter.include_pagination == 'y' %}
-// import br.com.caju.{{cookiecutter.resource_name_lower}}s.dto.toResponseDTO
+// import br.com.caju.{{cookiecutter.resource_name_lower}}.dto.toResponseDTO
 {% endif %}
 {% endif %}
 import java.util.UUID
