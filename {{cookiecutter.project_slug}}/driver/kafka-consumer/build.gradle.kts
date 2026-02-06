@@ -31,4 +31,5 @@ dependencies {
     testImplementation(libs.spring.kafka.test)
     testImplementation(libs.wiremock.standalone)
     testImplementation(libs.testcontainers.junit.jupiter)
+    testImplementation(testFixtures(projects.domain))
 }

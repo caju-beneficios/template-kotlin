@@ -1,15 +1,30 @@
 {
-  "project_name": "quickstart-service",
-  "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '-').replace('_', '-') }}",
-  "team_github_handle": "@caju-beneficios/backend-platform",
+  "project_name": "Example App",
+  "project_slug": "{{ cookiecutter.project_name | to_slug }}",
   "resource_name": "Article",
-  "resource_name_lower": "{{ cookiecutter.resource_name_lower }}",
-  "resource_name_camel": "{{ cookiecutter.resource_name }}",
-  "resource_name_plural": "{{ cookiecutter.resource_name }}s",
-  "resource_name_plural_lower": "{{ cookiecutter.resource_name_plural.lower() }}",
-  "resource_name_plural_camel": "{{ cookiecutter.resource_name_plural.capitalize() }}",
+
+  "_resource_name_class": "{{ cookiecutter.resource_name | to_pascal }}",
+  "_resource_name_variable": "{{ (cookiecutter.resource_name | to_pascal)[:1] | lower }}{{ (cookiecutter.resource_name | to_pascal)[1:] }}",
+  "_resource_name_package": "{{ cookiecutter.resource_name | to_pascal | lower }}",
+  "_resource_name_constant": "{{ cookiecutter.resource_name | to_pascal | upper }}",
+
+  "_resource_name_plural_class": "{{ cookiecutter.resource_name | to_pascal }}s",
+  "_resource_name_plural_variable": "{{ (cookiecutter.resource_name | to_pascal)[:1] | lower }}{{ (cookiecutter.resource_name | to_pascal)[1:] }}s",
+  "_resource_name_plural_package": "{{ cookiecutter.resource_name | to_pascal | lower }}s",
+  "_resource_name_plural_constant": "{{ cookiecutter.resource_name | to_pascal | upper }}S",
+
+  "team_github_handle": "@caju-beneficios/backend-platform",
   "rest_endpoint_version": "v1",
   "include_kafka_events": "y",
   "include_pagination": "y",
-  "_copy_without_render": ["*.tmpl"]
+
+  "_copy_without_render": ["*.tmpl"],
+  "_extensions": [
+    "extensions.str.StringExtension",
+    "cookiecutter.extensions.SlugifyExtension"
+  ],
+  "_jinja2_env_vars": {
+    "lstrip_blocks": true,
+    "trim_blocks": true
+  }
 }

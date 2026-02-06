@@ -21,6 +21,7 @@ flyway {
 dependencies {
     implementation(projects.domain)
     testImplementation(projects.domain)
+    testImplementation(testFixtures(projects.domain))
 
     implementation(libs.spring.boot.starter.actuator)
     implementation(libs.spring.boot.starter.data.jpa)

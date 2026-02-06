@@ -1,1 +1,3 @@
-
+plugins {
+    `java-test-fixtures`
+}

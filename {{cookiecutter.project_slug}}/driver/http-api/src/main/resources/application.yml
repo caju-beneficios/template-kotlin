@@ -41,7 +41,7 @@ spring:
     init:
       mode: always
   application:
-    name: { { cookiecutter.project_name } }
+    name: {{ cookiecutter.project_name }}
   jpa:
     open-in-view: false
     database-platform: org.hibernate.dialect.PostgreSQLDialect
@@ -90,7 +90,7 @@ spring:
       - org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration
 
 rest-client:
-  { { cookiecutter.resource_name_lower } }:
+  {{ cookiecutter._resource_name_package }}:
     url:
-      base: ${{ "${" }}{{cookiecutter.resource_name.upper()}}_BASE_URL:http://localhost:9561{{ "}" }}
-      context-path: ${{ "${" }}{{cookiecutter.resource_name.upper()}}_CONTEXT_PATH:/{{cookiecutter.resource_name_lower}}{{ "}" }}
+      base: ${{ "${" }}{{cookiecutter._resource_name_constant}}_BASE_URL:http://localhost:9561{{ "}" }}
+      context-path: ${{ "${" }}{{cookiecutter._resource_name_constant}}_CONTEXT_PATH:/{{cookiecutter._resource_name_package}}{{ "}" }}
