@@ -17,7 +17,7 @@ application {
 dependencies {
     implementation(projects.domain)
     implementation(projects.postgresqlPersistence)
-{% if cookiecutter.include_kafka_events == 'y' -%}
+{% if cookiecutter.include_kafka_events == 'y' %}
     implementation(projects.kafkaProducer)
 {% endif %}
 

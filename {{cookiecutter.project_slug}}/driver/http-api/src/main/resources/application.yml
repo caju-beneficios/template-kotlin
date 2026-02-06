@@ -56,7 +56,8 @@ spring:
       maximum-pool-size: 50
       minimum-idle: 1
       transaction-isolation: TRANSACTION_READ_COMMITTED
-      driver-class-name: org.postgresql.Driver{% if cookiecutter.include_kafka_events == "y" %}
+      driver-class-name: org.postgresql.Driver
+{% if cookiecutter.include_kafka_events == "y" %}
   kafka:
     bootstrap-servers: ${KAFKA_BROKER:localhost:29092}
     properties:
@@ -76,7 +77,8 @@ spring:
         max.poll.interval.ms: 6000000
         spring.json.trusted.packages: br.com.caju
     listener:
-      async-acks: true{% endif %}
+      async-acks: true
+{% endif %}
   jackson:
     time-zone: UTC
     date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
@@ -90,7 +92,7 @@ spring:
       - org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration
 
 rest-client:
-  {{ cookiecutter._resource_name_package }}:
+  {{ cookiecutter.resource_name_lower }}:
     url:
-      base: ${{ "${" }}{{cookiecutter._resource_name_constant}}_BASE_URL:http://localhost:9561{{ "}" }}
-      context-path: ${{ "${" }}{{cookiecutter._resource_name_constant}}_CONTEXT_PATH:/{{cookiecutter._resource_name_package}}{{ "}" }}
+      base: ${{ "${" }}{{cookiecutter.resource_name_constant}}_BASE_URL:http://localhost:9561{{ "}" }}
+      context-path: ${{ "${" }}{{cookiecutter.resource_name_constant}}_CONTEXT_PATH:/{{cookiecutter.resource_name_lower}}{{ "}" }}

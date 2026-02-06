@@ -2,16 +2,12 @@
   "project_name": "Example App",
   "project_slug": "{{ cookiecutter.project_name | to_slug }}",
   "resource_name": "Article",
+  "resource_name_lower": "{{ cookiecutter.resource_name | lower }}",
+  "resource_name_class": "{{ cookiecutter.resource_name | to_pascal }}",
+  "resource_name_constant": "{{ cookiecutter.resource_name | to_pascal | upper }}",
 
-  "_resource_name_class": "{{ cookiecutter.resource_name | to_pascal }}",
   "_resource_name_variable": "{{ (cookiecutter.resource_name | to_pascal)[:1] | lower }}{{ (cookiecutter.resource_name | to_pascal)[1:] }}",
-  "_resource_name_package": "{{ cookiecutter.resource_name | to_pascal | lower }}",
-  "_resource_name_constant": "{{ cookiecutter.resource_name | to_pascal | upper }}",
-
-  "_resource_name_plural_class": "{{ cookiecutter.resource_name | to_pascal }}s",
   "_resource_name_plural_variable": "{{ (cookiecutter.resource_name | to_pascal)[:1] | lower }}{{ (cookiecutter.resource_name | to_pascal)[1:] }}s",
-  "_resource_name_plural_package": "{{ cookiecutter.resource_name | to_pascal | lower }}s",
-  "_resource_name_plural_constant": "{{ cookiecutter.resource_name | to_pascal | upper }}S",
 
   "team_github_handle": "@caju-beneficios/backend-platform",
   "rest_endpoint_version": "v1",
