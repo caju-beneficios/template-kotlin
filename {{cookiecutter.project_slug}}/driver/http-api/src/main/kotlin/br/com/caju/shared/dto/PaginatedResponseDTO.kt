@@ -17,7 +17,6 @@ object PaginateResponse {
         return when (req) {
             is OffsetPagination -> this.offsetPagination(totalPages, totalItems, req)
             is CursorPagination -> this.cursorPagination(totalItems, req)
-            else -> error("The pagination type is not supported yet. pagination: $req.")
         }
     }
 

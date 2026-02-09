@@ -3,22 +3,24 @@ rootProject.name = "{{ cookiecutter.project_slug }}"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include("domain")
+
 project(":domain").projectDir = file("domain")
 
 // DRIVER
 include("http-api", "kafka-consumer")
 
 project(":http-api").projectDir = file("driver/http-api")
+
 project(":kafka-consumer").projectDir = file("driver/kafka-consumer")
 
 // DRIVEN
 include("postgresql-persistence"{% if cookiecutter.include_kafka_events == 'y' %}, "kafka-producer"{% endif %})
 
 project(":postgresql-persistence").projectDir = file("driven/postgresql-persistence")
-{% if cookiecutter.include_kafka_events == 'y' -%}
+{% if cookiecutter.include_kafka_events == 'y' %}
+
 project(":kafka-producer").projectDir = file("driven/kafka-producer")
 {% endif %}
-
 
 dependencyResolutionManagement {
     repositories {

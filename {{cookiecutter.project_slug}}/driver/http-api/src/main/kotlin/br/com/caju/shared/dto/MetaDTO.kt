@@ -18,11 +18,11 @@ sealed interface MetaDTO
 
 @Schema(name = "CursorMetaDTO", description = "Pagination information for Cursor pagination")
 data class CursorMetaDTO(
-    @Schema(
+    @param:Schema(
         name = "HasNext",
         description = "Boolean that indicates if there is more registers after this one",
     )
-    @JsonTypeInfo(
+    @param:JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,
         property = "hasNext",
@@ -32,7 +32,7 @@ data class CursorMetaDTO(
 
 @Schema(name = "OffsetMetaDTO", description = "Pagination information for Offset pagination")
 data class OffsetMetaDTO(
-    @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "page")
+    @param:JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "page")
     val page: Int,
     val perPage: Int,
     val totalPages: Int,

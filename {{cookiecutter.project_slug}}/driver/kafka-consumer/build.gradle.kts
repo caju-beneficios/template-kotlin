@@ -21,8 +21,8 @@ dependencies {
     implementation(libs.spring.kafka)
     implementation(libs.spring.boot.starter.aspectj)
 
-//    implementation(libs.springwolf.kafka)
-//    implementation(libs.springwolf.ui)
+    //    implementation(libs.springwolf.kafka)
+    //    implementation(libs.springwolf.ui)
 
     implementation(libs.spring.boot.starter.actuator)
     implementation(libs.spring.kafka)

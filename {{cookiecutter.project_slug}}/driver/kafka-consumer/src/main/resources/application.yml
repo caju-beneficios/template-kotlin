@@ -15,7 +15,7 @@ spring:
     init:
       mode: always
   application:
-    name: {{ cookiecutter.project_name }}-consumer
+    name: {{ cookiecutter.project_slug }}-kafka-consumer
   jpa:
     open-in-view: false
     properties:

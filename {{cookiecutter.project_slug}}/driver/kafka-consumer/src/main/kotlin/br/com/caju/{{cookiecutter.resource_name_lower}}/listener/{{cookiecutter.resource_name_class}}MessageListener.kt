@@ -1,8 +1,8 @@
 {% if cookiecutter.include_kafka_events == 'y' %}
 package br.com.caju.{{cookiecutter.resource_name_lower}}.listener
 
-import br.com.caju.domain.shared.log.logger
 import br.com.caju.{{cookiecutter.resource_name_lower}}.dto.{{cookiecutter.resource_name_class}}MessageListenerDTO
+import br.com.caju.domain.shared.log.logger
 import br.com.caju.shared.config.KafkaConstants.KAFKA_OPERATION_NAME
 import br.com.caju.shared.config.KafkaConstants.OFFSET_RESET_EARLIEST
 import datadog.trace.api.Trace

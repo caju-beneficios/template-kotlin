@@ -41,7 +41,7 @@ spring:
     init:
       mode: always
   application:
-    name: {{ cookiecutter.project_name }}-http-api
+    name: {{ cookiecutter.project_slug }}-http-api
   jpa:
     open-in-view: false
     properties:
